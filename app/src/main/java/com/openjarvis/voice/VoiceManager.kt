@@ -7,6 +7,7 @@ import androidx.security.crypto.MasterKey
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.cancel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -51,6 +52,11 @@ class VoiceManager(private val context: Context) {
 
     init {
         // Apply saved settings
+        ttsEngine.setSpeechRate(getSpeechRate())
+    }
+
+    /** No-op hook for callers that explicitly kick off setup; real init runs in the init block above. */
+    fun initialize() {
         ttsEngine.setSpeechRate(getSpeechRate())
     }
 
