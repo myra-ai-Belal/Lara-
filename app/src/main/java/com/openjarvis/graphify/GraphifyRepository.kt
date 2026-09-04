@@ -53,6 +53,15 @@ class GraphifyRepository(context: Context) {
         )
     }
 
+    suspend fun logNotification(summary: String) = withContext(Dispatchers.IO) {
+        taskNodeDao.insert(
+            TaskNode(
+                command = "[notification]",
+                result = summary
+            )
+        )
+    }
+
     suspend fun getRecentApps(limit: Int = 10): List<AppNode> = withContext(Dispatchers.IO) {
         appNodeDao.getRecentApps(limit)
     }
