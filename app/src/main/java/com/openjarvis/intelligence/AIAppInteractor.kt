@@ -7,14 +7,14 @@ import kotlinx.coroutines.delay
 
 class AIAppInteractor(private val context: Context) {
     
-    private val screenReader = ScreenReader(context)
+    private val screenReader = ScreenReader(JarvisAccessibilityService.instance!!)
     private val workingMemory = TaskWorkingMemory()
     
     fun openAIApp(meta: AIAppMeta): Boolean {
         return JarvisAccessibilityService.instance?.openAppByPackage(meta.packageName) ?: false
     }
     
-    fun clearContext() {
+    suspend fun clearContext() {
         try {
             JarvisAccessibilityService.instance?.pressBack()
             delay(300)
