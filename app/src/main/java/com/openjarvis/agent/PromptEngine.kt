@@ -191,8 +191,8 @@ Analyze the user's prompt and extract:
 Respond ONLY with JSON matching Intent schema.
     """.trimIndent()
     
-    suspend fun analyze(prompt: String): JSONObject = withContext(Dispatchers.IO) {
-        val adapter = UniversalAdapter.getModelManager(context)
+    suspend fun analyze(context: Context, prompt: String): JSONObject = withContext(Dispatchers.IO) {
+        val adapter = UniversalAdapter(context)
         val fullPrompt = "$systemPrompt\n\nUser prompt: $prompt"
         
         val result = adapter.complete(systemPrompt, prompt)
