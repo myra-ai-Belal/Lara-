@@ -35,7 +35,7 @@ class SelfHealingExecutor(private val context: Context) {
         val healingPrompt = buildHealingPrompt(action, context, currentScreen, attempt)
         
         val alternativeResponse = try {
-            llm.complete(healingPrompt.first, healingPrompt.second)
+            llm.complete(healingPrompt.first, healingPrompt.second).getOrNull()
         } catch (e: Exception) {
             null
         }
