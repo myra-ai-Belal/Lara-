@@ -43,6 +43,16 @@ class GraphifyRepository(context: Context) {
         )
     }
 
+    suspend fun logProviderFailure(providerName: String, error: String) = withContext(Dispatchers.IO) {
+        taskNodeDao.insert(
+            TaskNode(
+                command = "[provider_failure] $providerName",
+                result = error,
+                providerUsed = providerName
+            )
+        )
+    }
+
     suspend fun getRecentApps(limit: Int = 10): List<AppNode> = withContext(Dispatchers.IO) {
         appNodeDao.getRecentApps(limit)
     }
