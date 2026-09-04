@@ -238,8 +238,4 @@ class SocketServer(
             .replace("\r", "\\r")
             .replace("\t", "\\t")
     }
-
-    companion object {
-        const val SOCKET_NAME = "jarvis.port"
-    }
 }
