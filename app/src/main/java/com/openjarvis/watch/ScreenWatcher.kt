@@ -23,7 +23,7 @@ class ScreenWatcher(private val context: Context, private val agentCore: com.ope
     val state: StateFlow<WatcherState> = _state
     
     private val rules = mutableListOf<WatchRule>()
-    private val screenReader = ScreenReader(JarvisAccessibilityService.instance!!)
+    private val screenReader by lazy { ScreenReader(JarvisAccessibilityService.instance!!) }
     private val graphifyRepo = GraphifyRepository(context)
     private val batteryManager = context.getSystemService(Context.BATTERY_SERVICE) as BatteryManager
     
