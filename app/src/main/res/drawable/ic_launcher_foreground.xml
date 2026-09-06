@@ -1,19 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt"
     android:width="108dp"
     android:height="108dp"
     android:viewportWidth="108"
     android:viewportHeight="108">
-    <path
-        android:fillColor="#FFFFFF"
-        android:pathData="M54,30
-                         C45,30 38,37 38,46
-                         C38,55 45,62 54,62
-                         C63,62 70,55 70,46
-                         C70,37 63,30 54,30z
-                         M54,40
-                         C59,40 63,44 63,49
-                         C63,54 59,58 54,58
-                         C49,58 45,54 45,49
-                         C45,44 49,40 54,40z"/>
+
+    <!-- Bold "L" monogram for Lara AI -->
+    <path android:pathData="M40,24 L54,24 L54,70 L82,70 L82,84 L40,84 Z">
+        <aapt:attr name="android:fillColor">
+            <gradient
+                android:type="linear"
+                android:startX="40" android:startY="24"
+                android:endX="82" android:endY="84"
+                android:startColor="#8B5CF6"
+                android:endColor="#22D3EE" />
+        </aapt:attr>
+    </path>
+
+    <!-- Orbiting spark accent (AI touch) -->
+    <path android:pathData="M78,20 m-9,0 a9,9 0 1,1 18,0 a9,9 0 1,1 -18,0">
+        <aapt:attr name="android:fillColor">
+            <gradient
+                android:type="linear"
+                android:startX="69" android:startY="11"
+                android:endX="87" android:endY="29"
+                android:startColor="#22D3EE"
+                android:endColor="#8B5CF6" />
+        </aapt:attr>
+    </path>
 </vector>
