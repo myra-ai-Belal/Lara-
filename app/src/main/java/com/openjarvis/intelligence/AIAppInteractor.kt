@@ -7,7 +7,7 @@ import kotlinx.coroutines.delay
 
 class AIAppInteractor(private val context: Context) {
     
-    private val screenReader = ScreenReader(JarvisAccessibilityService.instance!!)
+    private val screenReader by lazy { ScreenReader(JarvisAccessibilityService.instance!!) }
     private val workingMemory = TaskWorkingMemory()
     
     fun openAIApp(meta: AIAppMeta): Boolean {
