@@ -161,7 +161,7 @@ fun SettingsScreen(
                     
                     SettingsToggleRow(
                         title = "Speak Results",
-                        subtitle = "Jarvis reads results aloud",
+                        subtitle = "Lara reads results aloud",
                         enabled = speakResults,
                         onToggle = { speakResults = !speakResults }
                     )
@@ -788,7 +788,11 @@ private fun AboutSection() {
         border = BorderStroke(1.dp, VoidColor.BorderSubtle)
     ) {
         Column {
-            AboutRow(title = "Version", value = "M1.0 (build 1)")
+            AboutRow(title = "App", value = "Lara AI")
+            Divider(thickness = 1.dp, color = VoidColor.BorderSubtle)
+            AboutRow(title = "Version", value = "1.0 (build 1)")
+            Divider(thickness = 1.dp, color = VoidColor.BorderSubtle)
+            AboutRow(title = "Developer", value = "Belal YT + চাঁদের পাহাড়")
             Divider(thickness = 1.dp, color = VoidColor.BorderSubtle)
             AboutRow(title = "License", value = "MIT Open Source")
             Divider(thickness = 1.dp, color = VoidColor.BorderSubtle)
@@ -796,7 +800,7 @@ private fun AboutSection() {
             Divider(thickness = 1.dp, color = VoidColor.BorderSubtle)
             
             Text(
-                text = "Built on Android · From Termux with love",
+                text = "Made with care by Belal YT + চাঁদের পাহাড়",
                 style = TextStyle(
                     fontFamily = FontFamily.Default,
                     fontWeight = FontWeight(400),
