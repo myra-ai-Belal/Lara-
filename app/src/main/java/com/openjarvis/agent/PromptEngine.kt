@@ -257,7 +257,7 @@ class ConversationContext {
     
     fun buildContextString(): String {
         return turns.takeLast(5).joinToString("\n") {
-            "${if (it.role == Role.USER) "User" else "Jarvis"}: ${it.text}"
+            "${if (it.role == Role.USER) "User" else "Lara"}: ${it.text}"
         }
     }
     
