@@ -19,6 +19,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.view.WindowCompat
+import com.openjarvis.LaraApplication
 import com.openjarvis.accessibility.JarvisAccessibilityService
 import com.openjarvis.agent.AgentCore
 import com.openjarvis.agent.AgentState
@@ -41,25 +42,43 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         WindowCompat.setDecorFitsSystemWindows(window, false)
         
-        // Wrapped defensively: if anything here throws, we show a friendly
-        // error screen instead of letting the whole app crash on launch.
-        try {
-            graphifyRepo = GraphifyRepository(this)
-            agentCore = AgentCore(this)
-        } catch (e: Exception) {
-            initError = e.message ?: "Unknown initialization error"
+        // If the app crashed last time (from any thread), show that reason now
+        // instead of silently trying again and possibly crashing the same way.
+        val crashFile = java.io.File(filesDir, LaraApplication.CRASH_LOG_FILE)
+        if (crashFile.exists()) {
+            initError = "Previous crash:\n\n" + crashFile.readText().take(1000)
+            crashFile.delete()
+        }
+        
+        // Wrapped defensively: if ANYTHING here throws (including Error
+        // subtypes like NoClassDefFoundError, not just Exception), we show
+        // a friendly on-screen message instead of letting the app crash
+        // silently with no way to see what went wrong.
+        if (initError == null) {
+            try {
+                graphifyRepo = GraphifyRepository(this)
+                agentCore = AgentCore(this)
+            } catch (e: Throwable) {
+                initError = "${e.javaClass.simpleName}: ${e.message ?: "no message"}"
+            }
         }
         
         setContent {
             OpenJarvisTheme {
                 var showSplash by remember { mutableStateOf(true) }
+                var runtimeError by remember { mutableStateOf<String?>(null) }
                 
-                if (showSplash) {
-                    LaraSplashScreen(onFinished = { showSplash = false })
-                } else if (initError != null) {
-                    InitErrorScreen(message = initError!!)
-                } else {
-                    MainAppContent()
+                when {
+                    runtimeError != null -> InitErrorScreen(message = runtimeError!!)
+                    showSplash -> LaraSplashScreen(onFinished = { showSplash = false })
+                    initError != null -> InitErrorScreen(message = initError!!)
+                    else -> {
+                        try {
+                            MainAppContent()
+                        } catch (e: Throwable) {
+                            runtimeError = "${e.javaClass.simpleName}: ${e.message ?: "no message"}"
+                        }
+                    }
                 }
             }
         }
