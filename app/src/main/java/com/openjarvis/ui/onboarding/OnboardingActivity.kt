@@ -181,7 +181,7 @@ private fun PermissionsScreen(onBack: () -> Unit, onContinue: () -> Unit) {
         Spacer(modifier = Modifier.height(8.dp))
         
         Text(
-            text = "Jarvis needs a few permissions to control your device",
+            text = "Lara needs a few permissions to control your device",
             fontSize = 14.sp,
             color = VoidColor.TextDisabled
         )
@@ -402,7 +402,7 @@ private fun ReadyScreen(onStart: () -> Unit) {
         Spacer(modifier = Modifier.height(8.dp))
         
         Text(
-            text = "Jarvis is ready to help you",
+            text = "Lara is ready to help you",
             fontSize = 14.sp,
             color = VoidColor.TextDisabled
         )
