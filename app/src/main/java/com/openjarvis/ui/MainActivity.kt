@@ -66,19 +66,11 @@ class MainActivity : ComponentActivity() {
         setContent {
             OpenJarvisTheme {
                 var showSplash by remember { mutableStateOf(true) }
-                var runtimeError by remember { mutableStateOf<String?>(null) }
                 
                 when {
-                    runtimeError != null -> InitErrorScreen(message = runtimeError!!)
                     showSplash -> LaraSplashScreen(onFinished = { showSplash = false })
                     initError != null -> InitErrorScreen(message = initError!!)
-                    else -> {
-                        try {
-                            MainAppContent()
-                        } catch (e: Throwable) {
-                            runtimeError = "${e.javaClass.simpleName}: ${e.message ?: "no message"}"
-                        }
-                    }
+                    else -> MainAppContent()
                 }
             }
         }
