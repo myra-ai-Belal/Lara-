@@ -9,7 +9,7 @@ import kotlinx.coroutines.delay
 
 class SelfHealingExecutor(private val context: Context) {
     
-    private val screenReader = ScreenReader(JarvisAccessibilityService.instance!!)
+    private val screenReader by lazy { ScreenReader(JarvisAccessibilityService.instance!!) }
     private val graphifyRepo = GraphifyRepository(context)
     private val llm = UniversalAdapter(context)
     
